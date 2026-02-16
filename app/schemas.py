@@ -1,5 +1,5 @@
 from datetime import datetime
-
+from typing import List
 from pydantic import BaseModel, EmailStr
 
 class CreateProduct(BaseModel):
@@ -60,4 +60,4 @@ class ProductWithReview(BaseModel):
     name: str
     slug: str
     rating: float
-    reviews: list[ReviewResponse]
+    reviews: List[ReviewResponse] = []

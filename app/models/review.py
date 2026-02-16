@@ -9,9 +9,9 @@ class Review(Base):
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey('users.id'))
     product_id = Column(Integer, ForeignKey('products.id'))
-    rating_id = Column(Integer, ForeignKey('rating.id'))
+    rating_id = Column(Integer, ForeignKey('ratings.id'))
     comment = Column(String(200))
-    comment_date = Column(DateTime, default=datetime.utcnow())
+    comment_date = Column(DateTime, default=datetime.now())
     is_active = Column(Boolean, default=True)
 
     user = relationship('User', back_populates='review')
