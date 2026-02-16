@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from pydantic import BaseModel, EmailStr
 
 class CreateProduct(BaseModel):
@@ -20,3 +22,42 @@ class CreateUser(BaseModel):
     username: str
     email: EmailStr
     password: str
+
+
+class CreateReview(BaseModel):
+    product_id: int
+    rating: int
+    comment: str
+
+
+class ReviewResponse(BaseModel):
+    id: int
+    user_id: int
+    product_id: int
+    rating_id: int
+    comment_date: datetime
+    rating: ResponseRating
+
+
+class RatingBase(BaseModel):
+    grade: int
+
+
+class CreateRating(RatingBase):
+    pass
+
+
+class ResponseRating(RatingBase):
+    id: int
+    user_id: int
+    product_id: int
+    is_active: bool
+
+
+
+class ProductWithReview(BaseModel):
+    id: int
+    name: str
+    slug: str
+    rating: float
+    reviews: list[ReviewResponse]
