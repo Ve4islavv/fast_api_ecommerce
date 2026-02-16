@@ -1,10 +1,6 @@
-
-
-from sqlalchemy import Column, String, Integer, Boolean
+from sqlalchemy import Column, String, Integer, ForeignKey, Boolean
 from sqlalchemy.orm import relationship
 from app.backend.db import Base
-
-
 
 class User(Base):
     __tablename__ = 'users'
@@ -22,8 +18,7 @@ class User(Base):
 
     password = Column(String())
 
+    # Relationships - ПРАВИЛЬНО
     products = relationship('Product', back_populates='supplier')
-    rating = relationship('Rating', back_populates='user')
-    review = relationship('Review', back_populates='user')
-
-
+    reviews = relationship('Review', back_populates='user', cascade='all, delete-orphan')
+    ratings = relationship('Rating', back_populates='user', cascade='all, delete-orphan')

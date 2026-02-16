@@ -3,7 +3,6 @@ from sqlalchemy import Column, Integer, String, Boolean, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 from datetime import datetime
 
-
 class Review(Base):
     __tablename__ = 'reviews'
     id = Column(Integer, primary_key=True, index=True)
@@ -14,7 +13,7 @@ class Review(Base):
     comment_date = Column(DateTime, default=datetime.now())
     is_active = Column(Boolean, default=True)
 
-    user = relationship('User', back_populates='review')
-    product = relationship('Product', back_populates='review')
+    # Relationships - ПРАВИЛЬНО
+    user = relationship('User', back_populates='reviews')
+    product = relationship('Product', back_populates='reviews')
     rating = relationship('Rating', back_populates='review')
-
